@@ -1,0 +1,31 @@
+<?php
+
+global $_MODULE;
+$_MODULE = array();
+$_MODULE['<{mpdbclean}prestashop>mpdbclean_dddda5c183e3d10a7dfd5561406794ec'] = 'Pulizia DB';
+$_MODULE['<{mpdbclean}prestashop>mpdbclean_f8854fe22fb39bea982611901329ca56'] = 'Pulisce il database da dati superflui come lingue aggiuntive, corrieri inutilizzati, valute e altro.';
+$_MODULE['<{mpdbclean}prestashop>mpdbclean_19fd8b3fb16cf2dca6eed59bc081468e'] = 'Questa azione disinstallerà il modulo. Sei sicuro?';
+$_MODULE['<{mpdbclean}prestashop>adminmpdbclean_77f38e2233b1de71c322ccee3567d001'] = 'Corrieri correttamente eliminati.';
+$_MODULE['<{mpdbclean}prestashop>adminmpdbclean_f867e1a6b71f27ad868017806ea12c59'] = 'Valute correttamente eliminate.';
+$_MODULE['<{mpdbclean}prestashop>adminmpdbclean_faaac6dc749c58cac30642864a3ffcc5'] = 'Linguaggi correttamente eliminati.';
+$_MODULE['<{mpdbclean}prestashop>form_3a08e2e340ab29fd9263af48193cbf8e'] = 'Linguaggi';
+$_MODULE['<{mpdbclean}prestashop>form_2a5975e1a75f6e7e310e7b3c5a56b135'] = 'Se vuoi eliminare un linguaggio, per piacere prima disattivalo.';
+$_MODULE['<{mpdbclean}prestashop>form_4c41e0bd957698b58100a5c687d757d9'] = 'Seleziona tutto';
+$_MODULE['<{mpdbclean}prestashop>form_6a1854f62e217911db9a2a437d219212'] = 'Seleziona nessuno';
+$_MODULE['<{mpdbclean}prestashop>form_e8c299ec7d66726ecbd5f7d9c386c5fc'] = 'Selezione inversa';
+$_MODULE['<{mpdbclean}prestashop>form_3074eab396db652bc8f5114e4bcddd4f'] = 'ELIMINA SELEZIONATI';
+$_MODULE['<{mpdbclean}prestashop>form_1d6af794b2599c1407a83029a09d1ecf'] = 'Corrieri';
+$_MODULE['<{mpdbclean}prestashop>form_bad20a72d1425a80d8eff3b730b72cc6'] = 'Se vuoi eliminare un corriere, per piacere prima disattivalo.';
+$_MODULE['<{mpdbclean}prestashop>form_0469cf6e41d1f85efb8699558cbd6266'] = 'Cambia Corriere con';
+$_MODULE['<{mpdbclean}prestashop>form_3f63451bbacbb1c3303d99d0309fdfe9'] = 'Per piacere seleziona un corriere.';
+$_MODULE['<{mpdbclean}prestashop>form_ba77a0afc6595c38ece332f217df865b'] = 'Cambia il corriere con quello selezionato, dopo l\'eliminazione.';
+$_MODULE['<{mpdbclean}prestashop>form_dfcfc43722eef1eab1e4a12e50a068b1'] = 'Valute';
+$_MODULE['<{mpdbclean}prestashop>form_ea7085018296423b2ec38d0d9c94485e'] = 'Se vuoi eliminare una valuta, per piacere prima disattivala.';
+$_MODULE['<{mpdbclean}prestashop>form_a586cf746e81672549075737335f1d9d'] = 'Cambia la valuta con';
+$_MODULE['<{mpdbclean}prestashop>form_0d2efd505eca63824b816574e87269cb'] = 'Per piacere seleziona una valuta.';
+$_MODULE['<{mpdbclean}prestashop>form_23ed894e8a9d581e80287c34cee03fcb'] = 'Cambia la valuta con quella selezionata, dopo l\'eliminazione.';
+$_MODULE['<{mpdbclean}prestashop>form_3e60bdf229b98f90974b54b8d665d664'] = 'Eliminare i linguaggi selezionati?';
+$_MODULE['<{mpdbclean}prestashop>form_ad31abe6705bf0c07820c1dcbf253b23'] = 'Per piacere, seleziona un corriere prima diprocedere.';
+$_MODULE['<{mpdbclean}prestashop>form_7415e14eaba541a138dbf32a6a1e8ade'] = 'Eliminare i corrieri selezionati?';
+$_MODULE['<{mpdbclean}prestashop>form_63cc78f98826d779aef5fa127947ccf6'] = 'Per piacere, seleziona una valuta prima di procedere.';
+$_MODULE['<{mpdbclean}prestashop>form_8023eb31f235469b6266b2956adcee15'] = 'Eliminare le valute selezionate?';
