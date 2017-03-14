@@ -86,6 +86,14 @@ class AdminMpDbCleanController extends ModuleAdminController
                 }
             }
         }
+        //Delete carrier range price and weight
+        try {
+            $db->delete('range_price','id_carrier in (' . $carriers . ')');
+            $db->delete('range_weight','id_carrier in (' . $carriers . ')');
+        } catch (Exception $exc) {
+            $this->msg_carriers .= $this->displayWarning($exc->getMessage());
+        }
+
         $arrTableUpdate =
                 [
                     'cart',
@@ -284,8 +292,7 @@ class AdminMpDbCleanController extends ModuleAdminController
                 ->orderBy('name');
         $result = $db->executeS($query);
         
-        return $result;
-            
+        return $result;      
     }
     
     /**
