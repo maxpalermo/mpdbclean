@@ -39,6 +39,7 @@ class MpDbClean extends Module
         $this->version = '1.0.0';
         $this->author = 'mpsoft';
         $this->need_instance = 0;
+        $this->module_key = '9a38789b81b0c006fada90cd07950f9c';
 
         /**
          * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
