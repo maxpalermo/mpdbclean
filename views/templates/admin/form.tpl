@@ -48,7 +48,7 @@
             <span>{l s='Languages' mod='mpdbclean'}</span>
         </div>
         {if !empty($msg_languages)}
-            {$msg_languages}
+            {$msg_languages|escape:'htmlall':'UTF-8'}
         {/if}
         <div class='form-wrapper' style='overflow: hidden;'>
             <br>
@@ -102,7 +102,7 @@
             <span>{l s='Carriers' mod='mpdbclean'}</span>
         </div>
         {if !empty($msg_carriers)}
-            {$msg_carriers}
+            {$msg_carriers|escape:'htmlall':'UTF-8'}
         {/if}
         <div class='form-wrapper' style='overflow: hidden;'>
             <br>
@@ -169,7 +169,7 @@
             <span>{l s='Currencies' mod='mpdbclean'}</span>
         </div>
         {if !empty($msg_currencies)}
-            {$msg_currencies}
+            {$msg_currencies|escape:'htmlall':'UTF-8'}
         {/if}
         <div class='form-wrapper' style='overflow: hidden;'>
             <br>

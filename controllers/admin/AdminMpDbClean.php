@@ -75,6 +75,7 @@ class AdminMpDbCleanController extends ModuleAdminController
         //Get all carriers table
         $db = Db::getInstance();
         $listCarriers = $this->getMySQLTable("carrier");
+        //Delete carrier reference
         foreach ($listCarriers as $carrier) {
             try {
                 if (!$this->contains('order_carrier', $carrier)) {
@@ -88,8 +89,8 @@ class AdminMpDbCleanController extends ModuleAdminController
         }
         //Delete carrier range price and weight
         try {
-            $db->delete('range_price','id_carrier in (' . $carriers . ')');
-            $db->delete('range_weight','id_carrier in (' . $carriers . ')');
+            $db->delete('range_price', 'id_carrier in (' . $carriers . ')');
+            $db->delete('range_weight', 'id_carrier in (' . $carriers . ')');
         } catch (Exception $exc) {
             $this->msg_carriers .= $this->displayWarning($exc->getMessage());
         }
@@ -220,8 +221,8 @@ class AdminMpDbCleanController extends ModuleAdminController
             } else {
                 foreach ($resultTbl as $error) {
                     $this->msg_languages .= $this->displayWarning($error['msg']);
-                }                
-            }            
+                }
+            }
         }
         if (empty($this->msg_languages)) {
             $this->msg_languages = $this->displayConfirmation($this->l('Languages successfully deleted'));
@@ -292,7 +293,7 @@ class AdminMpDbCleanController extends ModuleAdminController
                 ->orderBy('name');
         $result = $db->executeS($query);
         
-        return $result;      
+        return $result;
     }
     
     /**
