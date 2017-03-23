@@ -29,7 +29,7 @@
     </div>
     <ul>
     {foreach $messages as $message}
-        <li>{$message['message']}</li>
+        <li>{$message['message']|escape:'htmlall':'UTF-8'}</li>
     {/foreach}
     </ul>
 </div>

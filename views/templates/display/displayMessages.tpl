@@ -28,21 +28,21 @@
         <div class="bootstrap">
             <div class="module_confirmation conf confirm alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {$message['message']}
+                {$message['message']|escape:'htmlall':'UTF-8'}
             </div>
         </div>
     {elseif $message['type'] eq 'warning'}
         <div class="bootstrap">
             <div class="module_warning alert alert-warning">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {$message['message']}
+                {$message['message']|escape:'htmlall':'UTF-8'}
             </div>
         </div>
     {elseif $message['type'] eq 'error'}
         <div class="bootstrap">
             <div class="module_error alert alert-danger">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {$message['message']}
+                {$message['message']|escape:'htmlall':'UTF-8'}
             </div>
         </div>
     {/if}

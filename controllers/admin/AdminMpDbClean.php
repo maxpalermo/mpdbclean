@@ -25,9 +25,10 @@
 */
 
 if (!defined('MP_DBCLEAN_TEMPLATE_FOLDER')) {
-    define('MP_DBCLEAN_TEMPLATE_FOLDER', _PS_MODULE_DIR_ . 'mpdbclean'
-            . DIRECTORY_SEPARATOR . 'views'
-            . DIRECTORY_SEPARATOR . 'templates');
+    define('MP_DBCLEAN_TEMPLATE_FOLDER', 
+        _PS_MODULE_DIR_ . 'mpdbclean'
+        . DIRECTORY_SEPARATOR . 'views'
+        . DIRECTORY_SEPARATOR . 'templates');
 }
 
 class AdminMpDbCleanController extends ModuleAdminController
@@ -127,7 +128,7 @@ class AdminMpDbCleanController extends ModuleAdminController
         }
         if (empty($carriers)) {
             $this->msg_carriers = [];
-        } 
+        }
     }
     
     /**
@@ -255,8 +256,8 @@ class AdminMpDbCleanController extends ModuleAdminController
         parent::initContent();
         
         //DISPLAY MESSAGES
-        $messageTemplatePath = MP_DBCLEAN_TEMPLATE_FOLDER 
-                . DIRECTORY_SEPARATOR .  'display' 
+        $messageTemplatePath = MP_DBCLEAN_TEMPLATE_FOLDER
+                . DIRECTORY_SEPARATOR .  'display'
                 . DIRECTORY_SEPARATOR . 'displayMessages.tpl';
         $this->smarty->assign('messages', $this->msg_carriers);
         $fetchCarriers = $this->smarty->fetch($messageTemplatePath);
