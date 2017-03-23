@@ -25,10 +25,12 @@
 */
 
 if (!defined('MP_DBCLEAN_TEMPLATE_FOLDER')) {
-    define('MP_DBCLEAN_TEMPLATE_FOLDER', 
+    define(
+        'MP_DBCLEAN_TEMPLATE_FOLDER',
         _PS_MODULE_DIR_ . 'mpdbclean'
         . DIRECTORY_SEPARATOR . 'views'
-        . DIRECTORY_SEPARATOR . 'templates');
+        . DIRECTORY_SEPARATOR . 'templates'
+        );
 }
 
 class AdminMpDbCleanController extends ModuleAdminController
