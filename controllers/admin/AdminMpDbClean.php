@@ -24,6 +24,12 @@
 *  International Registered Trademark & Property of mpSOFT
 */
 
+if (!defined('MP_DBCLEAN_TEMPLATE_FOLDER')) {
+    define('MP_DBCLEAN_TEMPLATE_FOLDER', _PS_MODULE_DIR_ . 'mpdbclean'
+            . DIRECTORY_SEPARATOR . 'views'
+            . DIRECTORY_SEPARATOR . 'templates');
+}
+
 class AdminMpDbCleanController extends ModuleAdminController
 {
     private $smarty;
@@ -40,6 +46,9 @@ class AdminMpDbCleanController extends ModuleAdminController
         parent::__construct();
 
         $this->smarty = Context::getContext()->smarty;
+        $this->msg_languages = [];
+        $this->msg_currencies = [];
+        $this->msg_carriers = [];
     }
 
     public function initToolbar()
@@ -53,10 +62,10 @@ class AdminMpDbCleanController extends ModuleAdminController
         if (!empty(Tools::getValue('txtLanguageList', ''))) {
             $this->processLanguages();
         }
-        if (!empty(Tools::getValue('txtCarrierList'))) {
+        if (!empty(Tools::getValue('txtCarrierList', ''))) {
             $this->processCarriers();
         }
-        if (!empty(Tools::getValue('txtCurrencyList'))) {
+        if (!empty(Tools::getValue('txtCurrencyList', ''))) {
             $this->processCurrencies();
         }
     }
@@ -83,7 +92,7 @@ class AdminMpDbCleanController extends ModuleAdminController
                 }
             } catch (Exception $exc) {
                 if (!$this->contains('Unknown column', $exc->getMessage())) {
-                    $this->msg_carriers .= $this->displayWarning($exc->getMessage());
+                    $this->msg_carriers[] = $exc->getMessage();
                 }
             }
         }
@@ -92,7 +101,7 @@ class AdminMpDbCleanController extends ModuleAdminController
             $db->delete('range_price', 'id_carrier in (' . $carriers . ')');
             $db->delete('range_weight', 'id_carrier in (' . $carriers . ')');
         } catch (Exception $exc) {
-            $this->msg_carriers .= $this->displayWarning($exc->getMessage());
+            $this->msg_carriers[] = ['type'=>'error', 'message'=>$exc->getMessage()];
         }
 
         $arrTableUpdate =
@@ -110,16 +119,15 @@ class AdminMpDbCleanController extends ModuleAdminController
             try {
                 $db->update($table, ["id_carrier" => $updCarrier], "id_carrier in ($carriers)");
             } catch (Exception $exc) {
-                $this->msg_carriers .= $this->displayWarning($exc->getMessage());
+                $this->msg_carriers[] = ['type'=>'warning', 'message'=>$exc->getMessage()];
             }
         }
         if (empty($this->msg_carriers)) {
-            $this->msg_carriers = $this->displayConfirmation($this->l('Carriers successfully deleted'));
+            $this->msg_carriers[] = ['type'=>'success', 'message'=>$this->l('Carriers successfully deleted')];
         }
         if (empty($carriers)) {
-            $this->msg_carriers = '';
-        }
-            
+            $this->msg_carriers = [];
+        } 
     }
     
     /**
@@ -140,7 +148,7 @@ class AdminMpDbCleanController extends ModuleAdminController
             try {
                 $db->delete($currency, "id_currency in ($currencies)", 0, false, false);
             } catch (Exception $exc) {
-                $this->msg_currencies .= $this->displayWarning($exc->getMessage());
+                $this->msg_currencies[] = ['type'=>'warning', 'message'=>$exc->getMessage()];
             }
         }
         $arrTableUpdate =
@@ -160,14 +168,14 @@ class AdminMpDbCleanController extends ModuleAdminController
             try {
                 $db->update($table, ["id_currency" => $updCurrency], "id_currency in ($currencies)");
             } catch (Exception $exc) {
-                $this->msg_currencies .= $this->displayWarning($exc->getMessage());
+                $this->msg_currencies[] = ['type'=>'warning', 'message'=>$exc->getMessage()];
             }
         }
         if (empty($this->msg_currencies)) {
-            $this->msg_currencies = $this->displayConfirmation($this->l('Currencies successfully deleted'));
+            $this->msg_currencies[] = ['type'=>'success', 'message'=>$this->l('Currencies successfully deleted')];
         }
         if (empty($currencies)) {
-            $this->msg_currencies = '';
+            $this->msg_currencies = [];
         }
     }
     
@@ -216,19 +224,19 @@ class AdminMpDbCleanController extends ModuleAdminController
                 try {
                     $db->delete("lang", "id_lang in($langs)");
                 } catch (Exception $exc) {
-                    $this->msg_languages .= $this->displayWarning($exc->getMessage());
+                    $this->msg_languages[] = ['type'=>'error', 'message'=>$exc->getMessage()];
                 }
             } else {
                 foreach ($resultTbl as $error) {
-                    $this->msg_languages .= $this->displayWarning($error['msg']);
+                    $this->msg_languages[] = ['type'=>'warning', 'message'=>$error['msg']];
                 }
             }
         }
         if (empty($this->msg_languages)) {
-            $this->msg_languages = $this->displayConfirmation($this->l('Languages successfully deleted'));
+            $this->msg_languages[] = ['type'=>'success', 'message'=>$this->l('Languages successfully deleted')];
         }
         if (empty($langs)) {
-            $this->msg_languages = '';
+            $this->msg_languages = [];
         }
     }
     
@@ -245,6 +253,24 @@ class AdminMpDbCleanController extends ModuleAdminController
         $this->postProcess();
         
         parent::initContent();
+        
+        //DISPLAY MESSAGES
+        $messageTemplatePath = MP_DBCLEAN_TEMPLATE_FOLDER 
+                . DIRECTORY_SEPARATOR .  'display' 
+                . DIRECTORY_SEPARATOR . 'displayMessages.tpl';
+        $this->smarty->assign('messages', $this->msg_carriers);
+        $fetchCarriers = $this->smarty->fetch($messageTemplatePath);
+        $this->smarty->assign('carriers_display_messages', $fetchCarriers);
+        
+        $this->smarty->assign('messages', $this->msg_currencies);
+        $fetchCurrencies = $this->smarty->fetch($messageTemplatePath);
+        $this->smarty->assign('currencies_display_messages', $fetchCurrencies);
+        
+        $this->smarty->assign('messages', $this->msg_languages);
+        $fetchLanguages = $this->smarty->fetch($messageTemplatePath);
+        $this->smarty->assign('languages_display_messages', $fetchLanguages);
+        
+        $this->smarty->clearAssign('messages');
         
         $this->smarty->assign('lang_rows', $this->getLanguageListContent());
         $this->smarty->assign('carrier_rows', $this->getCarrierListContent());
@@ -357,7 +383,6 @@ class AdminMpDbCleanController extends ModuleAdminController
         $result = $db->executeS($query);
         
         return $result;
-            
     }
     
     /**
@@ -441,74 +466,5 @@ class AdminMpDbCleanController extends ModuleAdminController
             chmod($target, 0777);
             unlink($target);
         }
-    }
-    
-    /**
-     * Helper displaying error message(s)
-     * @param string|array $error
-     * @return string
-     */
-    public function displayError($error)
-    {
-        $output = '
-		<div class="bootstrap">
-		<div class="module_error alert alert-danger" >
-			<button type="button" class="close" data-dismiss="alert">&times;</button>';
-
-        if (is_array($error)) {
-            $output .= '<ul>';
-            foreach ($error as $msg) {
-                $output .= '<li>'.$msg.'</li>';
-            }
-            $output .= '</ul>';
-        } else {
-            $output .= $error;
-        }
-
-        // Close div openned previously
-        $output .= '</div></div>';
-
-        $this->error = true;
-        return $output;
-    }
-
-    /**
-    * Helper displaying warning message(s)
-    * @param string|array $error
-    * @return string
-    */
-    public function displayWarning($warning)
-    {
-        $output = '
-		<div class="bootstrap">
-		<div class="module_warning alert alert-warning" >
-			<button type="button" class="close" data-dismiss="alert">&times;</button>';
-
-        if (is_array($warning)) {
-            $output .= '<ul>';
-            foreach ($warning as $msg) {
-                $output .= '<li>'.$msg.'</li>';
-            }
-            $output .= '</ul>';
-        } else {
-            $output .= $warning;
-        }
-
-        // Close div openned previously
-        $output .= '</div></div>';
-
-        return $output;
-    }
-
-    public function displayConfirmation($string)
-    {
-        $output = '
-		<div class="bootstrap">
-		<div class="module_confirmation conf confirm alert alert-success">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			'.$string.'
-		</div>
-		</div>';
-        return $output;
     }
 }

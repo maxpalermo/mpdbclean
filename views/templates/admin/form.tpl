@@ -47,9 +47,7 @@
             <img src="{$img_folder|escape:'htmlall':'UTF-8'}languages.png">
             <span>{l s='Languages' mod='mpdbclean'}</span>
         </div>
-        {if !empty($msg_languages)}
-            {$msg_languages|escape:'htmlall':'UTF-8'}
-        {/if}
+        {$languages_display_messages}
         <div class='form-wrapper' style='overflow: hidden;'>
             <br>
             <label class='control-label'>{l s='If you want to delete a language, please deactivate it first.' mod='mpdbclean'}</label>
@@ -101,9 +99,7 @@
             <img src="{$img_folder|escape:'htmlall':'UTF-8'}truck.png">
             <span>{l s='Carriers' mod='mpdbclean'}</span>
         </div>
-        {if !empty($msg_carriers)}
-            {$msg_carriers|escape:'htmlall':'UTF-8'}
-        {/if}
+        {$carriers_display_messages}
         <div class='form-wrapper' style='overflow: hidden;'>
             <br>
             <label class='control-label'>{l s='If you want to delete a carrier, please deactivate it first.' mod='mpdbclean'}</label>
@@ -168,9 +164,7 @@
             <img src="{$img_folder|escape:'htmlall':'UTF-8'}currencies.png">
             <span>{l s='Currencies' mod='mpdbclean'}</span>
         </div>
-        {if !empty($msg_currencies)}
-            {$msg_currencies|escape:'htmlall':'UTF-8'}
-        {/if}
+        {$currencies_display_messages}
         <div class='form-wrapper' style='overflow: hidden;'>
             <br>
             <label class='control-label'>{l s='If you want to delete a currency, please deactivate it first.' mod='mpdbclean'}</label>
