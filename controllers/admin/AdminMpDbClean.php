@@ -30,7 +30,7 @@ if (!defined('MP_DBCLEAN_TEMPLATE_FOLDER')) {
         _PS_MODULE_DIR_ . 'mpdbclean'
         . DIRECTORY_SEPARATOR . 'views'
         . DIRECTORY_SEPARATOR . 'templates'
-        );
+    );
 }
 
 class AdminMpDbCleanController extends ModuleAdminController
@@ -259,7 +259,7 @@ class AdminMpDbCleanController extends ModuleAdminController
         
         //DISPLAY MESSAGES
         $messageTemplatePath = MP_DBCLEAN_TEMPLATE_FOLDER
-                . DIRECTORY_SEPARATOR .  'display'
+                . DIRECTORY_SEPARATOR .  'admin'
                 . DIRECTORY_SEPARATOR . 'displayMessages.tpl';
         $this->smarty->assign('messages', $this->msg_carriers);
         $fetchCarriers = $this->smarty->fetch($messageTemplatePath);
